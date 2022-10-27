@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "aptos": "^1.3.16",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.7"
+  }
+}
