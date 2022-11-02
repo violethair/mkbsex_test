@@ -9,7 +9,7 @@ dotenv.config();
 import { AptosClient, AptosAccount, TokenClient, CoinClient, Types } from "aptos";
 
 const NODE_URL = "https://fullnode.testnet.aptoslabs.com/v1/";
-const ALICE_PRIVATE_KEY = "0xe1f65bbdf6550bcf9d9234f0c1ddb94a462cc33ea21a8b855c178e457b3aa1f6";
+const ALICE_PRIVATE_KEY = "0xe90ffd5f382bb361c4a3460efefe4235ba80042074a21f49f707f33ffafebcf9";
 const BOB_PRIVATE_KEY = "0xb1a5b063dd133b6edd6fdb877521cae54c50cd90cdd7b368484eead7f49b24cd";
 
 (async () => {
@@ -40,7 +40,7 @@ const BOB_PRIVATE_KEY = "0xb1a5b063dd133b6edd6fdb877521cae54c50cd90cdd7b368484ee
     console.log(`Bob: ${bob.address()}`);
     // console.log("");
 
-    const collectionName = "Collection of Alice"
+    const collectionName = "Collection of Alice 4"
 
     // Create the collection.
     // :!:>section_4
@@ -53,7 +53,7 @@ const BOB_PRIVATE_KEY = "0xb1a5b063dd133b6edd6fdb877521cae54c50cd90cdd7b368484ee
     // await client.waitForTransaction(txnHash1, { checkSuccess: true });
     // console.log("Collection created");
 
-    const tokenName = "Alice #5";
+    const tokenName = "token cua vanvan";
     // console.log("=== Creating Token ===");
     // const txnHash2 = await tokenClient.createToken(
     //     alice,
@@ -86,15 +86,15 @@ const BOB_PRIVATE_KEY = "0xb1a5b063dd133b6edd6fdb877521cae54c50cd90cdd7b368484ee
 
     // Bob claims the token Alice offered him.
     // :!:>section_10
-    const txnHash4 = await tokenClient.claimToken(
-        bob,
-        alice.address(),
-        alice.address(),
-        collectionName,
-        tokenName,
-    ); // <:!:section_10
-    await client.waitForTransaction(txnHash4, { checkSuccess: true });
-    console.log(`Claim transaction hash: ${txnHash4}`);
+    // const txnHash4 = await tokenClient.claimToken(
+    //     bob,
+    //     alice.address(),
+    //     alice.address(),
+    //     collectionName,
+    //     tokenName,
+    // ); // <:!:section_10
+    // await client.waitForTransaction(txnHash4, { checkSuccess: true });
+    // console.log(`Claim transaction hash: ${txnHash4}`);
 
     // const txnHash2 = await tokenClient.createToken(
     //     alice,
@@ -111,16 +111,16 @@ const BOB_PRIVATE_KEY = "0xb1a5b063dd133b6edd6fdb877521cae54c50cd90cdd7b368484ee
     // await client.waitForTransaction(txnHash2, { checkSuccess: true })
     // console.log("Token created");
 
-    // console.log("=== Transfer Direct token From Alice to Bob ===");
-    // let txnHash5 = await tokenClient.directTransferToken(
-    //     alice,
-    //     bob,
-    //     alice.address(),
-    //     collectionName,
-    //     tokenName,
-    //     1,
-    // ); // <:!:section_11
-    // await client.waitForTransaction(txnHash5, { checkSuccess: true });
+    console.log("=== Transfer Direct token From Alice to Bob ===");
+    let txnHash5 = await tokenClient.directTransferToken(
+        alice,
+        bob,
+        alice.address(),
+        collectionName,
+        tokenName,
+        1,
+    ); // <:!:section_11
+    await client.waitForTransaction(txnHash5, { checkSuccess: true });
 
 
     // console.log("=== Minting Token ===");
