@@ -1,9 +1,13 @@
 [package]
-name = 'vantoken2'
+name = 'vantestnet'
 version = '1.0.0'
 [dependencies.AptosFramework]
 git = 'https://github.com/aptos-labs/aptos-core.git'
 rev = 'main'
 subdir = 'aptos-move/framework/aptos-framework'
+[dependencies.AptosToken]
+git = 'https://github.com/aptos-labs/aptos-core.git'
+rev = 'main'
+subdir = 'aptos-move/framework/aptos-token'
 [addresses]
 owner = 'b6889be3263ee4c28c20a9d18c83ac67f23dff7d4b4c934e12f16ee685a78279'
