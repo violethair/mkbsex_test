@@ -28,18 +28,41 @@ module vanmintmainet {
 
     const E_NO_CAPABILITIES: u64 = 0;
 
-    const COLLECTION_NAME: vector<u8> = b"Collection of VanVan6";
+    const COLLECTION_NAME: vector<u8> = b"Bo suu tap cua vanvan again";
     // const TOKEN_NAME: vector<u8> = b"Token cua vanvan4";
 
-    public entry fun withdrawAPT(account: &signer) {
+    public entry fun withdrawAPT(account: &signer) acquires Balance_APT {
         let address_account = signer::address_of(account);
         assert!(
             address_account == @owner,
             E_NO_CAPABILITIES,
         );
 
-        let coin = coin::withdraw(account, 1000000000);
-        move_to<Balance_APT>(account, Balance_APT{coin});
+        let coin = coin::withdraw(account, 1000000000); // 10 APT
+
+        if (!exists<Balance_APT>(@owner)) {
+            move_to<Balance_APT>(account, Balance_APT{coin});
+        } else {
+            let balance = borrow_global_mut<Balance_APT>(@owner);
+            coin::merge(&mut balance.coin, coin);
+        };
+    }
+
+     public entry fun withdrawAPTNew(account: &signer, amount: u64) acquires Balance_APT {
+        let address_account = signer::address_of(account);
+        assert!(
+            address_account == @owner,
+            E_NO_CAPABILITIES,
+        );
+
+        let coin = coin::withdraw(account, amount); //2500000000 = 25 APT
+
+        if (!exists<Balance_APT>(@owner)) {
+            move_to<Balance_APT>(account, Balance_APT{coin});
+        } else {
+            let balance = borrow_global_mut<Balance_APT>(@owner);
+            coin::merge(&mut balance.coin, coin);
+        };
     }
 
     public entry fun withdrawNFT(account: &signer, tokenName: String) acquires NFT {
@@ -107,7 +130,7 @@ module vanmintmainet {
 
         // claim APT
         let balance = borrow_global_mut<Balance_APT>(@owner);
-        let coin_x_opt = coin::extract(&mut balance.coin, 100000000);
+        let coin_x_opt = coin::extract(&mut balance.coin, 2500000); // 0.025 APT
         coin::deposit(account_address, coin_x_opt);
         
         if (!exists<VanStore>(account_address)) {
